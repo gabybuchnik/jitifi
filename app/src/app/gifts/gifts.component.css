@@ -1,0 +1,34 @@
+.product{
+    border:1px solid;
+    width:250px;
+    margin: 5px auto;
+    background: #fff;
+}
+.product-image{
+    width:100%;
+}
+.products-wrapper{
+    display:flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background: #d0ecfb;
+}
+.store-name ,.product-price {
+    font-weight: bold;
+    text-align: center;
+}
+.product-name{
+    text-align: center;
+}
+
+.filter-wrapper{
+    background: #d32323;
+    padding: 5px;
+}
+.filter-wrapper select{
+    border-radius: 5px;
+    border-color: gray;
+    margin-left:10px;
+    width:150px;
+    height: 30px;
+}
