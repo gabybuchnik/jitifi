@@ -21,11 +21,13 @@ export class GiftsComponent implements OnInit {
   filterGender() {
     this.products = [];
     let order = this.gender.nativeElement.options[this.gender.nativeElement.selectedIndex].value;
-    this.products = this.jitifiService.showStoresProductsByGender(+order);
+    let tagid = this.jitifiService.getGendersTags(+order);
+    this.products = this.jitifiService.showStoresProductsByGender(tagid);
   }
   filterPrice(){
     this.products = [];
     let value = this.budget.nativeElement.options[this.budget.nativeElement.selectedIndex].value;
-    this.products = this.jitifiService.showStoresProductsByPrice(value);
+    let tagid = this.jitifiService.getPriceTags(value);
+    this.products = this.jitifiService.showStoresProductsByPrice(tagid);
   }
 }

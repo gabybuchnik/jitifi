@@ -7,19 +7,23 @@ import { product } from '../models/jitifi.model';
 export class JitifiService {
   private data;
   private products: product[];
+
   constructor() {
     this.data = [];
     this.products = [];
     this.loadJsonFile();
   }
+
   async loadJsonFile() {
     let res = await fetch('../assets/data/products.json');
     let data = await res.json();
     this.data = data;
   }
+
   getData() {
     return this.data;
   }
+
   showStoresProducts(): product[] {
     this.products = [];
     for (let store of this.data.Stores) {
@@ -37,13 +41,18 @@ export class JitifiService {
     }
     return this.products;
   }
-  showStoresProductsByGender(order: number): product[] {
+
+  getGendersTags(order: number) {
     let tagid = null;
     for (let gender of this.data.GenderFilter) {
       if (gender.Order === order) {
         tagid = gender.TagId;
       }
     }
+    return tagid;
+  }
+
+  showStoresProductsByGender(tagid: number): product[] {
     if (tagid) {
       this.products = [];
       for (let store of this.data.Stores) {
@@ -70,8 +79,8 @@ export class JitifiService {
     }
     return this.products;
   }
-  showStoresProductsByPrice(value: string): product[] {
-    this.products = [];
+
+  getPriceTags(value: string) {
     let tagid = [];
     let val = value.split('-');
     let [priceA, priceB] = val;
@@ -89,12 +98,20 @@ export class JitifiService {
       else if (minPrice && maxPrice && price.Value >= minPrice && price.Value <= maxPrice) {
         tagid.push(price.TagId);
       }
-      else {
-        this.showStoresProducts();
-      }
     }
-    return this.loadProducts(tagid);
+    return tagid;
   }
+
+  showStoresProductsByPrice(tagid: number[]): product[] {
+    this.products = [];
+    if (tagid.length) {
+      return this.loadProducts(tagid);
+    }
+    else {
+      return this.showStoresProducts();
+    }
+  }
+
   loadProducts(tagid: number[]) {
     if (tagid.length) {
       this.products = [];
@@ -118,9 +135,6 @@ export class JitifiService {
           }
         }
       }
-    }
-    else {
-      this.showStoresProducts();
     }
     return this.products;
   }
