@@ -1,0 +1,16 @@
+<div class="filter-wrapper">
+    <select (change)="filterGender()" #gender>
+      <option value="1">Him</option>
+      <option value="2">Her</option>
+      <option value="3">Both</option>
+    </select>
+  
+    <select (change)="filterPrice()" #budget>
+      <option value="25">up to 25$</option>
+      <option value="25-50">25$ - 50$</option>
+      <option value="50-75">50$ - 75$</option>
+      <option value="75-100">75$ - 100$</option>
+      <option value="100">100$+</option>
+      <option value="9999">All</option>
+    </select>
+  </div>

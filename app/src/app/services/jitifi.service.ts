@@ -42,7 +42,7 @@ export class JitifiService {
     return this.products;
   }
 
-  getGendersTags(order: number) {
+  getGendersTags(order: number) : number{
     let tagid = null;
     for (let gender of this.data.GenderFilter) {
       if (gender.Order === order) {
@@ -80,7 +80,7 @@ export class JitifiService {
     return this.products;
   }
 
-  getPriceTags(value: string) {
+  getPriceTags(value: string) : number[]{
     let tagid = [];
     let val = value.split('-');
     let [priceA, priceB] = val;
@@ -112,7 +112,7 @@ export class JitifiService {
     }
   }
 
-  loadProducts(tagid: number[]) {
+  loadProducts(tagid: number[]) : product[]{
     if (tagid.length) {
       this.products = [];
       for (let store of this.data.Stores) {
